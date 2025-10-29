@@ -77,7 +77,7 @@ hostnamectl set-hostname br-srv.au-team.irpo
 bash
 ```
 
-#### Настройка адрессации
+#### Настройка адресации
 ##### ISP
 ```
 auto ens18
@@ -101,21 +101,21 @@ gateway 172.16.1.1
 #vlan 100
 auto ens19.100
 iface ens19.100 inet static
-address 1921.168.0.1
+address 192.168.0.1
 netmask 255.255.255.224
 vlan_raw_device ens19
 
 #vlan 200
 auto ens19.200
 iface ens19.200 inet static
-address 1921.168.0.33
+address 192.168.0.33
 netmask 255.255.255.240
 vlan_raw_device ens19
 
 #vlan 999
 auto ens19.999
 iface ens19.999 inet static
-address 1921.168.0.49
+address 192.168.0.49
 netmask 255.255.255.248
 vlan_raw_device ens19
 
@@ -231,9 +231,9 @@ systemctl restart netfilter-persistent
     
     - Пароль пользователя remote_user с паролем P@ssw0rd
         
-    - Идентификатор пользователя 1010
+    - Идентификатор пользователя 2026
         
-    - Пользователь sshuser должен иметь возможность запускать sudo без дополнительной аутентификации.
+    - Пользователь remote_user должен иметь возможность запускать sudo без дополнительной аутентификации.
         
 - Создайте пользователя net_admin на маршрутизаторах HQ-RTR и BR-RTR
     
@@ -247,7 +247,7 @@ systemctl restart netfilter-persistent
 #### remote_user
 **1.** Создаём remote_user следующими командами:
 ```
-useradd remote_user -u 1010
+useradd remote_user -u 2026
 passwd remote_user
 P@ssw0rd
 ```
@@ -328,7 +328,7 @@ nano /etc/ssh/sshd_config
 ```
 
 ```
-Port 2024
+Port 2026
 MaxAuthTries 2
 PasswordAuthentication yes
 Banner /etc/ssh/banner
@@ -408,8 +408,9 @@ router ospf
   passive-interface default
   router-id 1.1.1.1
   network 172.16.0.0/30 area 0
-  network 192.168.100.0/26 area 1
-  network 192.168.200.0/28 area 2
+  network 192.168.0.0/27 area 1
+  network 192.168.0.33/28 area 2
+  network 192.168.0.48/29 area 3
   area 0 authentication
 exit
 
@@ -429,7 +430,7 @@ int gre1
 **5.** Пишем команды для настройки **маршрутизации:**
 **Меняется:**
 - `id-router: 2.2.2.2`
-- `network 192.168.0.0/27 area 3`
+- `network 192.168.1.0/27 area 4`
 - `network 172.16.0.0/30 area 0`
     
 ```
@@ -437,7 +438,7 @@ conf t
 router ospf
   passive-interface default
   router-id 2.2.2.2
-  network 192.168.0.0/27 area 3
+  network 192.168.0.1/27 area 4
   network 172.16.0.0/30 area 0
   area 0 authentication
 exit
@@ -472,8 +473,9 @@ vtysh
 #### Настройка динамической сетевой трансляции на `HQ-RTR`
 ```
 apt-get install iptables iptables-persistent –y
-iptables –t nat –A POSTROUTING –s 192.168.100.0/26 –o ens192 –j MASQUERADE
-iptables –t nat –A POSTROUTING –s 192.168.200.0/28 –o ens192 –j MASQUERADE
+iptables –t nat –A POSTROUTING –s 192.168.0.0/27 –o ens18 –j MASQUERADE
+iptables –t nat –A POSTROUTING –s 192.168.0.33/28 –o ens18 –j MASQUERADE
+iptables –t nat –A POSTROUTING –s 192.168.0.48/29 –o ens18 –j MASQUERADE
 netfilter-persistent save
 systemctl restart netfilter-persistent  
 ```
@@ -481,7 +483,7 @@ systemctl restart netfilter-persistent
 #### Настройка динамической сетевой трансляции на `BR-RTR`
 ```
 apt-get install iptables iptables-persistent –y
-iptables –t nat –A POSTROUTING –s 192.168.1.0/27 –o ens192 –j MASQUERADE
+iptables –t nat –A POSTROUTING –s 192.168.1.0/27 –o ens18 –j MASQUERADE
 netfilter-persistent save
 systemctl restart netfilter-persistent  
 ```
