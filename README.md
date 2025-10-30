@@ -363,7 +363,7 @@ conf t
 router ospf
   passive-interface default
   router-id 2.2.2.2
-  network 192.168.2.1/27 area 4
+  network 192.168.2.0/27 area 4
   network 172.16.0.0/30 area 0
   area 0 authentication
 exit
