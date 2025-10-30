@@ -143,8 +143,6 @@ allow-hotplug ens18
 iface ens18 inet static
 address 192.168.2.2/28
 gateway 192.168.2.1
-dns-nameservers 192.168.1.2
-dns-search au-team.irpo
 ```
 ##### HQ-SRV
 ```
@@ -223,7 +221,7 @@ usermod -aG sudo net_admin
 
   **3.** Добавляем следующую строку в `/etc/sudoers`:
 ```yaml
-net_admin ALL=(ALL) NOPASSWD:ALL
+net_admin	ALL=(ALL:ALL) NOPASSWD: ALL
 ```
 ## Задание 4 `[VLAN]`
 ### Задание
