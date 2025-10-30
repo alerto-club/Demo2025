@@ -1,8 +1,9 @@
-![[Pasted image 20251029033949.png]]
+<img width="564" height="672" alt="Pasted image 20251029033949" src="https://github.com/alerto-club/Demo2025/blob/main/Pasted%20image%2020251029033949.png" />
 
 ## Преднастройка
 
 ##### На всех КРОМЕ CLI выключаем GNOME
+
 ```
 sudo systemctl set-default multi-user.target
 sudo reboot
