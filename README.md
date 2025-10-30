@@ -147,9 +147,7 @@ gateway 192.168.2.1
 ##### HQ-SRV
 ```
 allow-hotplug ens18.100
-iface ens18.100 inet static
-address 192.168.1.2/27
-gateway 192.168.1.1
+iface ens18.100 inet dhcp
 ```
 
 ## Задание 2 `[NAT на ISP]`
