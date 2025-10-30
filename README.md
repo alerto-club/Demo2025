@@ -148,7 +148,7 @@ gateway 192.168.2.1
 ```
 allow-hotplug ens18.200
 iface ens18.200 inet static
-address 192.168.1.2/29
+address 192.168.1.2/28
 gateway 192.168.1.1
 ```
 ##### HQ-SRV
