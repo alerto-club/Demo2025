@@ -1,5 +1,4 @@
-
-![Uploading Pasted image 20251029033949.png…]()
+![[Pasted image 20251029033949.png]]
 
 ## Преднастройка
 
