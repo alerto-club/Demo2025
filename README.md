@@ -395,7 +395,7 @@ vtysh
 ### Решение
 #### Настройка динамической сетевой трансляции на `HQ-RTR`
 ```
-apt-get install iptables iptables-persistent –y
+apt install iptables iptables-persistent –y
 iptables –t nat –A POSTROUTING –s 192.168.1.0/27 –o ens18 –j MASQUERADE
 iptables –t nat –A POSTROUTING –s 192.168.1.33/28 –o ens18 –j MASQUERADE
 iptables –t nat –A POSTROUTING –s 192.168.1.48/29 –o ens18 –j MASQUERADE
@@ -405,7 +405,7 @@ systemctl restart netfilter-persistent
 
 #### Настройка динамической сетевой трансляции на `BR-RTR`
 ```
-apt-get install iptables iptables-persistent –y
+apt install iptables iptables-persistent –y
 iptables –t nat –A POSTROUTING –s 192.168.2.0/27 –o ens18 –j MASQUERADE
 netfilter-persistent save
 systemctl restart netfilter-persistent  
@@ -489,7 +489,7 @@ systemctl enable isc-dhcp-server
 #### HQ-SRV 
 **1.** Для работы с **DNS** требуется установить **`bind`** и доп. пакет командой:
 ```
-apt-get install bind9 bind9-utils
+apt install bind9 bind9-utils
 ```
 
   **2.** Далее необходимо сконфигурировать файл **`named.conf.options`** таким образом:
