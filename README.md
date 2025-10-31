@@ -228,6 +228,7 @@ usermod -aG sudo net_admin
 ```yaml
 net_admin	ALL=(ALL:ALL) NOPASSWD: ALL
 ```
+
 ## Задание 4 `[VLAN]`
 ### Задание
 #### Настройте на интерфейсе `HQ-RTR` в сторону офиса `HQ` виртуальный коммутатор
@@ -310,7 +311,7 @@ systemctl restart networking
 #### HQ-RTR
 **1.** Устанавливаем пакет `FRR`
 ```
-sudo apt install -y frr
+sudo apt install frr -y
 ```
 
 **2.** В конфигурационном файле `/etc/frr/daemons` необходимо активировать выбранный протокол `OSPF` для дальнейшей реализации его настройки:
@@ -441,12 +442,10 @@ nano /etc/dhcp/dhcpd.conf
 ```
 
 ```
-authotitative; 
-default-lease-time 600; 
-max-lease-time 7200; 
-option domain-name "au-team.irpo"; 
-default-lease-time 600; 
+authotitative;
+default-lease-time 600;
 max-lease-time 7200;
+option domain-name "au-team.irpo";
 
 subnet 192.168.1.32 netmask 255.255.255.240 {
   range 192.168.1.34 192.168.1.46;
@@ -578,8 +577,8 @@ web	IN	A	172.16.2.2
 
 **5.** После чего **создаем файлы** командами:
 ```
-cp /etc/bind/db.127 /var/lib/bind/db.1.168.192
-cp /etc/bind/db.127 /var/lib/bind/db.2.168.192
+cp /etc/bind/db.empty /var/lib/bind/db.1.168.192
+cp /etc/bind/db.empty /var/lib/bind/db.2.168.192
 ```
 
 **6.** ```nano /var/lib/bind/db.1.168.192```:
