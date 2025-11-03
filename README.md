@@ -553,7 +553,14 @@ zone "2.168.192.in-addr.arpa" {
 };
 ```
 
-**4.** ```nano /var/lib/bind/db.au-team.irpo```:
+**5.** После чего **создаем файлы** командами:
+```
+cp /etc/bind/db.empty /var/lib/bind/db.au-team.irpo
+cp /etc/bind/db.empty /var/lib/bind/db.1.168.192
+cp /etc/bind/db.empty /var/lib/bind/db.2.168.192
+```
+
+**5.** ```nano /var/lib/bind/db.au-team.irpo```:
 
 ```
 $TTL	604800
@@ -573,12 +580,6 @@ hq-cli	IN	A	192.168.1.34
 hq-rtr	IN	A	192.168.1.1
 docker	IN	A	172.16.1.2
 web	IN	A	172.16.2.2
-```
-
-**5.** После чего **создаем файлы** командами:
-```
-cp /etc/bind/db.empty /var/lib/bind/db.1.168.192
-cp /etc/bind/db.empty /var/lib/bind/db.2.168.192
 ```
 
 **6.** ```nano /var/lib/bind/db.1.168.192```:
