@@ -553,7 +553,7 @@ zone "2.168.192.in-addr.arpa" {
 };
 ```
 
-**5.** После чего **создаем файлы** командами:
+**4.** После чего **создаем файлы** командами:
 ```
 cp /etc/bind/db.empty /var/lib/bind/db.au-team.irpo
 cp /etc/bind/db.empty /var/lib/bind/db.1.168.192
